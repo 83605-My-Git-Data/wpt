@@ -1,0 +1,38 @@
+.outer{
+
+    display: flex;
+    
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+    margin-bottom: 30px;
+}
+.no{
+    display: flex ;
+}
+
+#ino{
+    margin-left: 42px;
+}
+
+#iname{
+    margin-left: 20px;
+}
+#iaddress{
+    margin-left: 6px;
+}
+
+#addbtn{
+    margin-top: 20px;
+}
+
+#clearbtn{
+    margin-left: 70px;
+}
+
+#table{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}

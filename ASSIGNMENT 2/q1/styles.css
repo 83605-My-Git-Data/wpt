@@ -1,0 +1,178 @@
+.line1d1{
+    background-color: red;
+    height: 40px;
+    width: 100%;
+}
+
+.line2d2{
+    background-color: blue;
+    height: 40px;
+    width: 100%;
+}
+
+.line3d1{
+    background-color: red;
+    height: 40px;
+    width: 10%;
+
+}
+
+.line3d2{
+    background-color: green;
+    height: 40px;
+    width: 90%;
+}
+
+.line3d3{
+    background-color: blue;
+    height: 40px;
+    width: 10%;
+}
+
+.line4d1{
+    background-color: red;
+    height: 40px;
+    width: 95%;
+}
+.line4d2{
+    background-color: blue;
+    height: 40px;
+    width: 5%;
+}
+
+.line5d1{
+    background-color: green;
+    height: 40px;
+    width: 100%;
+}
+.line5d2{
+    background-color: red;
+    margin-top: 10px;
+    height: 20px;
+    width: 3%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.line6d1{
+    background-color: red;
+    height: 40px;
+    width: 100%;
+}
+.line6d2{
+    background-color: blue;
+    
+    
+    height: 39px;
+    width: 8%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.line7d1{
+    background-color: blue;
+    height: 39px;
+    width: 100%;
+}
+.line7d2{
+    background-color: red;
+    
+    
+    height: 39px;
+    width: 5%;
+    
+    margin-right: auto;
+}
+
+.line7d3{
+    background-color: green;
+    margin-right:10px ;
+    margin-top: 15px;
+    
+    height: 10px;
+    width: 100%;
+}
+
+
+.line8d1{
+    background-color: yellow;
+   display: flex;
+   justify-content:space-around;
+   
+    
+    
+    height: 39px;
+    width: 100%;
+}
+
+.line8d2{
+    background-color: green;
+    
+    
+    
+    height: 39px;
+    width: 15%;
+}.line8d3{
+    background-color: green;
+    
+    
+    height: 39px;
+    width: 15%;
+}
+.line8d4{
+    background-color: green;
+    
+    
+    height: 39px;
+    width: 15%;
+}
+.line8d5{
+    background-color: green;
+    
+    
+    height: 39px;
+    width: 15%;
+}
+
+
+.line9d1{
+    background-color: yellow;
+   display: flex;
+   justify-content:space-around;
+   
+    
+    
+    height: 39px;
+    width: 100%;
+}
+
+.line9d2{
+    background-color: green;
+    
+    
+    
+    height: 39px;
+    width: 1%;
+}.line9d3{
+    background-color: green;
+    
+    
+    height: 39px;
+    width: 1%;
+}
+.line9d4{
+    background-color: green;
+    
+    
+    height: 39px;
+    width: 1%;
+}
+.line9d5{
+    background-color: green;
+    
+    
+    height: 39px;
+    width: 1%;
+}
+

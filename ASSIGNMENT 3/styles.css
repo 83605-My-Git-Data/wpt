@@ -1,0 +1,64 @@
+.topLine{
+    color: black;
+    font-size: xx-large;
+    font-weight: 200;
+    text-decoration: underline;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mydiv{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+}
+
+label{
+    margin-right: 10px;
+}
+
+input{
+    margin-right: 5px;
+}
+
+#register,#clear{
+    margin-top: 30px;
+    padding: 7px;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+button{
+    cursor: pointer;
+}
+
+.body{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.form-container {
+    flex: 1;
+    margin-right: 20px;
+}
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+.image-container {
+    flex: 1;
+}
+
+#img{
+    margin-top: -235px;
+    margin-left: 200px;
+}
+
+.buttonClass{
+    margin-top: 20px;
+    margin-left: 100px;
+}

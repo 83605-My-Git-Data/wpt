@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3</title>
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+
+<body>
+
+    
+    <div class="topLine">Registration Form</div>
+
+    <form style="display: flex;margin-top: 30px;  margin-left: 800px;  flex-direction: column;">
+
+        <div>
+            <label for="name" id="nameId" >Name:</label>
+
+        <input type="text" name="name" id="name" placeholder="enter your name">
+
+        </div>
+
+       <div class="mydiv"> 
+        <label for="birthdate" >BirthDate: </label>
+        <input type="date" name="birthdate"  id="birthdate">
+
+       </div>
+
+
+       <div class="mydiv"> 
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" placeholder="abc@gmail.com">
+       </div>
+
+       <div class="mydiv">
+
+        <label for="password">password: </label>
+        <input type="password" id="password">
+       </div>
+
+       <div class="mydiv">
+        <label for="address">Address: </label>
+        <select name="dropdown" id="state">
+            <option value="option1">Maharashtra</option>
+            <option value="option2">Gujarat</option>
+            <option value="option3">Jammu and Kashmir</option>
+        </select>
+
+        <select name="dropdown" id="district">
+            <option value="option1">Ahmednagar</option>
+            <option value="option2">Pune</option>
+            <option value="option3">Vadodara</option>
+            <option value="option4">Surat</option>
+            <option value="option5">Poonch</option>
+            <option value="option6">Naushrea</option>
+        </select>
+
+        <select name="dropdown" id="city">
+            <option value="option1">Ahmednagar</option>
+            <option value="option2">Pune</option>
+            <option value="option3">Vadodara</option>
+            <option value="option4">Surat</option>
+            <option value="option5">Poonch</option>
+            <option value="option6">Naushrea</option>
+        </select>
+       </div>
+
+
+       <div class="mydiv">
+        <label for="gender">Gender: </label>
+        <input type="radio" value="Male" > Male
+        <input type="radio" value="Female" > Female
+       </div>
+
+       <div class="mydiv">
+
+        <label for="photo">Upload your photo: </label>
+        <button type="file"  onclick=upload()>Upload</button>
+          
+       </div>
+
+       <div class="mydiv">
+
+        <label for="">Select your course: </label>
+        <select name="dropdown" id="course">
+            <option value="option1">DAC</option>
+            <option value="option1">DMC</option>
+            <option value="option1">DBDA</option>
+        </select>
+       </div>
+        
+    </form>
+
+
+
+    <div>
+
+   
+    <img src="Screenshot 2024-04-25 at 5.56.16 PM.png" id="img" height="300px" width="300px" alt="">
+    <br><br>
+</div>
+
+
+<div class="buttonClass">
+    <button type="button" id="register" onclick=doValidations()>Register</button>
+    <button type="button" id="clear" onclick=clearContents()>Clear</button>
+    
+
+</div>
+   
+</body>
+
+<script>
+    function upload(){
+        console.log("hii");
+    }
+
+    function doValidations(){
+       
+
+        let v1 = document.getElementById('name');
+        let v2 = document.getElementById('birthdate');
+       
+        
+
+       if(v1.value === ""){
+           alert('enter name')
+       }
+
+      
+    if(v2.value === ""){
+            alert('enter birthdate')
+        }
+
+
+    }
+
+    function clearContents(){
+
+        document.getElementById('name').value = "";
+        document.getElementById('birthdate').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('password').value = "";
+        document.getElementById('state').selectedIndex = 0;
+        document.getElementById('district').selectedIndex = 0;
+        document.getElementById('city').selectedIndex = 0;
+        document.querySelector('input[name="gender"]:checked').checked = false;
+        document.getElementById('course').selectedIndex = 0;
+        
+    }
+
+
+
+
+
+
+
+
+</script>
+</html>
