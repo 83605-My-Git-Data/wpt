@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    
+</head>
+<body>
+    <div class="container">
+
+        <div id="welcome">
+            <h2>Welcome, You are logged in as:</h2>
+            
+        </div>
+        <button type="button" id="logout" onclick="LogOut()">Log Out</button>
+        <button type="button" id="getFoodData" onclick="getFoodData()">Get Food Data</button>
+    </div>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">SR</th>
+            <th scope="col">Img</th>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- <tr>
+            <th scope="row">1</th>
+            <td><img src="vadapav.jpeg" height="100px" width="100px" alt=""></td> 
+            <td>Vadapav</td> 
+            <td>20</td>  
+            <td><button type="button" class="btn btn-primary">Add To Cart</button></td>   
+          </tr> -->
+          
+        </tbody>
+      </table>
+    
+</body>
+<script src="jquery-3.7.1.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="index.js"></script>
+</html>
+

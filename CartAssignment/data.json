@@ -1,0 +1,21 @@
+ [{
+    "itemNo" : "1",
+    "itemName": "vadapav",
+    "price": "20",
+    "image":"vadapav.jpeg"
+},{
+    "itemNo" : "2",
+    "itemName": "panipuri",
+    "price": "30",
+    "image":"pp.jpg"
+},{
+    "itemNo" : "3",
+    "itemName": "bhel",
+    "price": "40",
+    "image":"bhel.jpg"
+},{
+    "itemNo" : "4",
+    "itemName": "dabeli",
+    "price": "50",
+    "image":"dabeli.jpg"
+}]
