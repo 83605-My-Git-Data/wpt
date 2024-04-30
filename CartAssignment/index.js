@@ -1,5 +1,7 @@
 let refToUserName = document.getElementById('name');
 let refToPassword = document.getElementById('password');
+let refTobillingBody = document.getElementById('billingBody');
+
 
 function SubmitData(){
    
@@ -52,6 +54,7 @@ function getFoodData(){
 
             let refToTableBody = document.getElementById('tableBody');
             refToTableBody.innerHTML = "";
+           
 
             for(let i = 0;i<reply.length;i++){
                 let row = ` <tr>
@@ -59,11 +62,18 @@ function getFoodData(){
                 <td><img src="${reply[i].image}" height="100px" width="100px" alt=""></td> 
                 <td>${reply[i].itemName}</td> 
                 <td>${reply[i].price}</td>  
-                <td><button type="button" class="btn btn-primary" onClick="addToCart()">Add To Cart</button></td>   
+                <td><button type="button" class="btn btn-primary" onClick="addToCart(${reply[i].itemNo})">Add To Cart</button></td>   
               </tr>`
 
               refToTableBody.innerHTML += row;
+
+              
+
+             
+
+
             }
+
 
             
         }
@@ -73,4 +83,101 @@ function getFoodData(){
 
     helper.open('GET',"http://127.0.0.1:5500/CartAssignment/data.json")
     helper.send();
+}
+
+let addedItems = [];
+
+function addToCart(itemNo){
+
+    
+
+    
+
+    
+    
+    fetch("http://127.0.0.1:5500/CartAssignment/data.json")
+    .then(res=>res.json())
+    .then(reply=>{
+
+        if(addedItems.includes(itemNo)){
+            alert("already added item")
+        }
+        
+        else{
+        
+            let row = ` <tr>
+            <th scope="row">${reply[itemNo-1].itemNo}</th>
+            
+            <td>${reply[itemNo-1].itemName}</td> 
+            <td>${reply[itemNo-1].price}</td>  
+            <td><button onclick="increaseCount(${itemNo})">+</button>
+            <div id="quantity${itemNo}">1</div> 
+            <button onclick="decreaseCount(${itemNo})">-</button>
+            </td>
+            <td id=total${itemNo}>${reply[itemNo-1].price} RS </td>
+
+            
+             
+          </tr>`
+        
+          refTobillingBody.innerHTML += row;
+
+          addedItems.push(itemNo);
+         
+            }
+        }
+
+    )
+    .catch(err=>{
+        console.log("error while getting data"+err);
+    })
+
+
+
+}
+
+
+
+
+function increaseCount(item){
+    let refToQuantity = document.getElementById(`quantity${item}`);
+    let count = parseInt(refToQuantity.innerHTML);
+    count++;
+    refToQuantity.innerHTML = count;
+
+    finalPrice(item,count);
+
+  
+
+   
+
+
+}
+
+function decreaseCount(item){
+    let refToQuantity =  parseInt( document.getElementById(`quantity${item}`));
+    let count = parseInt(refToQuantity.innerHTML);
+    if(count ==0){
+        alert('count cannot be -ve')
+        return;
+    }
+    count--;
+    refToQuantity.innerHTML = count;
+
+    finalPrice(item,count)
+
+  
+
+   
+
+
+}
+
+function finalPrice(itemNo,qt){
+    let refTototal = document.getElementById(`total${itemNo}`);
+    let price = parseInt( refTototal.innerText);
+    let total = price*qt;
+
+    document.getElementById(`total${itemNo}`).innerText = total +" RS";
+
 }

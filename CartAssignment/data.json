@@ -7,15 +7,15 @@
     "itemNo" : "2",
     "itemName": "panipuri",
     "price": "30",
-    "image":"pp.jpg"
+    "image":"panipuri.jpeg"
 },{
     "itemNo" : "3",
     "itemName": "bhel",
     "price": "40",
-    "image":"bhel.jpg"
+    "image":"bhel.jpeg"
 },{
     "itemNo" : "4",
     "itemName": "dabeli",
     "price": "50",
-    "image":"dabeli.jpg"
+    "image":"dabeli.jpeg"
 }]
