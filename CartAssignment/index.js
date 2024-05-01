@@ -109,7 +109,7 @@ function addToCart(itemNo){
             <th scope="row">${reply[itemNo-1].itemNo}</th>
             
             <td>${reply[itemNo-1].itemName}</td> 
-            <td>${reply[itemNo-1].price}</td>  
+            <td id="price${itemNo}">${reply[itemNo-1].price}</td>  
             <td><button onclick="increaseCount(${itemNo})">+</button>
             <div id="quantity${itemNo}">1</div> 
             <button onclick="decreaseCount(${itemNo})">-</button>
@@ -142,7 +142,7 @@ function addToCart(itemNo){
 function increaseCount(item){
     let refToQuantity = document.getElementById(`quantity${item}`);
     let count = parseInt(refToQuantity.innerHTML);
-    count++;
+    ++count;
     refToQuantity.innerHTML = count;
 
     finalPrice(item,count);
@@ -155,13 +155,13 @@ function increaseCount(item){
 }
 
 function decreaseCount(item){
-    let refToQuantity =  parseInt( document.getElementById(`quantity${item}`));
+    let refToQuantity = document.getElementById(`quantity${item}`);
     let count = parseInt(refToQuantity.innerHTML);
     if(count ==0){
         alert('count cannot be -ve')
         return;
     }
-    count--;
+    --count;
     refToQuantity.innerHTML = count;
 
     finalPrice(item,count)
@@ -174,10 +174,37 @@ function decreaseCount(item){
 }
 
 function finalPrice(itemNo,qt){
-    let refTototal = document.getElementById(`total${itemNo}`);
-    let price = parseInt( refTototal.innerText);
+    // let refTototal = document.getElementById(`total${itemNo}`);
+    let refToPrice = document.getElementById(`price${itemNo}`)
+    let price = parseInt( refToPrice.innerText);
     let total = price*qt;
 
     document.getElementById(`total${itemNo}`).innerText = total +" RS";
+    calculateFinalTotal();
 
 }
+
+
+function calculateFinalTotal(){
+    let row = document.querySelectorAll('#billingBody tr');
+    let finalBill = 0;
+
+    row.forEach(row =>{
+        let total = parseInt( row.querySelector('td:last-child').innerText);
+        finalBill += total;
+
+    })
+
+    document.getElementById('totalBill').innerText = 'Total Amount: '+finalBill;
+}
+
+
+
+// function calculateTotalBill(){
+//     let refTototal = document.getElementById(`total${itemNo}`).innerText;
+//     return `<h3>Total Bill: ${refTototal}</h3>`
+
+// }
+
+// let refTobill = document.getElementById('totalBill');
+// refTobill.innerHTML += calculateTotalBill();
