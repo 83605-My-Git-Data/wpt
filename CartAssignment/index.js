@@ -1,6 +1,7 @@
 let refToUserName = document.getElementById('name');
 let refToPassword = document.getElementById('password');
 let refTobillingBody = document.getElementById('billingBody');
+let refToTableBody = document.getElementById('tableBody');
 
 
 function SubmitData(){
@@ -52,12 +53,12 @@ function getFoodData(){
             let reply =  JSON.parse(helper.responseText);
             // let data = reply.data;
 
-            let refToTableBody = document.getElementById('tableBody');
+           
             refToTableBody.innerHTML = "";
            
 
             for(let i = 0;i<reply.length;i++){
-                let row = ` <tr>
+                let row = `<tr id=tr${reply[i].itemNo}>
                 <th scope="row">${reply[i].itemNo}</th>
                 <td><img src="${reply[i].image}" height="100px" width="100px" alt=""></td> 
                 <td>${reply[i].itemName}</td> 
@@ -105,9 +106,8 @@ function addToCart(itemNo){
         
         else{
         
-            let row = ` <tr>
+            let row = `<tr id=trBill${itemNo}>
             <th scope="row">${reply[itemNo-1].itemNo}</th>
-            
             <td>${reply[itemNo-1].itemName}</td> 
             <td id="price${itemNo}">${reply[itemNo-1].price}</td>  
             <td><button onclick="increaseCount(${itemNo})">+</button>
@@ -115,14 +115,12 @@ function addToCart(itemNo){
             <button onclick="decreaseCount(${itemNo})">-</button>
             </td>
             <td id=total${itemNo}>${reply[itemNo-1].price} RS </td>
-
-            
-             
-          </tr>`
+            </tr>`
         
           refTobillingBody.innerHTML += row;
 
           addedItems.push(itemNo);
+          calculateFinalTotal();
          
             }
         }
@@ -154,24 +152,40 @@ function increaseCount(item){
 
 }
 
-function decreaseCount(item){
+function decreaseCount(item) {
     let refToQuantity = document.getElementById(`quantity${item}`);
     let count = parseInt(refToQuantity.innerHTML);
-    if(count ==0){
-        alert('count cannot be -ve')
+
+
+    if (count <= 0) {
+        let deletingRow = document.getElementById(`trBill${item}`);
+
+        let parent = deletingRow.parentNode;
+        console.log(parent);
+        
+
+       
+        
+        
+            refTobillingBody.removeChild(deletingRow); 
+            let index = addedItems.indexOf(item);
+
+            
+            for(let i = index;i<addedItems.length-1;i++){
+                addedItems[i] = addedItems[i+1];
+               }
+               addedItems.pop();
+            
+            calculateFinalTotal(); 
+       
         return;
     }
     --count;
     refToQuantity.innerHTML = count;
 
-    finalPrice(item,count)
-
-  
-
-   
-
-
+    finalPrice(item, count);
 }
+
 
 function finalPrice(itemNo,qt){
     // let refTototal = document.getElementById(`total${itemNo}`);
@@ -197,14 +211,3 @@ function calculateFinalTotal(){
 
     document.getElementById('totalBill').innerText = 'Total Amount: '+finalBill;
 }
-
-
-
-// function calculateTotalBill(){
-//     let refTototal = document.getElementById(`total${itemNo}`).innerText;
-//     return `<h3>Total Bill: ${refTototal}</h3>`
-
-// }
-
-// let refTobill = document.getElementById('totalBill');
-// refTobill.innerHTML += calculateTotalBill();
