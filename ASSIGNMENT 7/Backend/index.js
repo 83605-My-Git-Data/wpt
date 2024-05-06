@@ -1,8 +1,14 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql2');
+const jwt = require('jsonwebtoken');
+const jwtSecret = 'hihellohowru';
+
 
 app.use(express.json());
+
+
+//  token of gaurav eyJhbGciOiJIUzI1NiJ9.YVdGdFoyRjFjbUYy.7E7bbucGvHp5N1JncWwpcRXaetQm9K_RZMbKV5U4ESw
 
 
 
@@ -15,6 +21,71 @@ const connectionString = {
 
 }
 
+app.post('/users/signup',(req,res)=>{
+    const firstName = req.body.firstName;
+    const lastName  = req.body.lastName;
+    const email = req.body.email;
+    const password = req.body.password;
+    const phoneNumber = req.body.phoneNumber;
+
+    const changedPassword = btoa(password);
+    console.log(changedPassword);
+    
+
+    let connection = mysql.createConnection(connectionString);
+    connection.connect();
+
+
+    let queryText = `insert into user (firstName,lastName,email,password,phoneNumber,createdTimestamp) values ('${firstName}','${lastName}',
+    '${email}','${changedPassword}','${phoneNumber}',CURRENT_TIMESTAMP)`;
+
+    connection.query(queryText,(err,result)=>{
+        if(!err){
+            res.write(JSON.stringify(result));
+            connection.end();
+            res.end();
+        }
+        else{
+            res.write(JSON.stringify(err));
+            connection.end();
+            res.end();
+        }
+    })
+
+
+})
+
+app.post('/users/login',(req,res)=>{
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const changedPassword = btoa(password);
+
+    let connection = mysql.createConnection(connectionString)
+    connection.connect();
+    console.log(changedPassword);
+
+    let queryText = `select id from user where email = '${email}' and password = '${changedPassword}'`;
+
+    connection.query(queryText,(err,result)=>{
+        if(!err){
+            const token = jwt.sign(changedPassword,jwtSecret);
+
+            res.write(JSON.stringify(result));
+            res.write(JSON.stringify(token));
+            connection.end();
+            res.end();
+        }
+        else{
+            res.write(JSON.stringify(err));
+            connection.end();
+            res.end();
+        }
+    })
+
+
+   
+})
 
 
 app.post('/property',(req,res)=>{
