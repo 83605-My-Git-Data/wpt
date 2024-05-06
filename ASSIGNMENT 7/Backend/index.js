@@ -87,6 +87,28 @@ app.post('/users/login',(req,res)=>{
    
 })
 
+app.get('/users/profile',(req,res)=>{
+    
+    let connection = mysql.createConnection(connectionString);
+    connection.connect();
+
+    let queryText = `select firstName,lastName,email,phoneNumber from user`
+
+    connection.query(queryText,(err,result)=>{
+        if(!err){
+            res.json(result);
+        }
+        else{
+            res.write(JSON.stringify(err));
+            connection.end();
+            res.end();
+
+        }
+    })
+
+
+})
+
 
 app.post('/property',(req,res)=>{
     const categoryId = req.body.categoryId;
@@ -196,6 +218,35 @@ app.get('/property',(req,res)=>{
         }
     })
 })
+
+app.post('/category',(req,res)=>{
+    const title = req.body.title;
+    const details = req.body.details;
+    const image = req.body.image;
+
+
+
+    let connection = mysql.createConnection(connectionString);
+    connection.connect();
+
+    let queryText = `insert into category (title,details,image,createdTimestamp) values ('${title}','${details}','${image}',CURRENT_TIMESTAMP )`;
+
+    connection.query(queryText,(err,result)=>{
+        if(!err){
+            res.json(result);
+            connection.end();
+        }
+        else{
+            res.json(err);
+            connection.end();
+        }
+    })
+
+
+
+})
+
+
 
 
 
