@@ -2,18 +2,10 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
-const { log } = require('console');
-
 const jwtSecret = 'hihellohowru';
 
 
 app.use(express.json());
-
-
-
-//  token of aditi eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFuZ2VkUGFzc3dvcmQiOiJhV0Z0WVdScGRHaz0iLCJpZCI6MTIsImlhdCI6MTcxNTAxMzk5MX0.eewFeVJWBah8Aoy8Tuum6TELLwEXune6ZMCdU36qlx4
-
-
 
 const connectionString = {
     host:"localhost",
@@ -74,7 +66,6 @@ app.post('/users/login',(req,res)=>{
         if(!err){
             
             const id = result[0].id;
-            console.log(id);
             const token = jwt.sign({changedPassword,id}
                 ,jwtSecret);
 
@@ -289,8 +280,8 @@ app.post('/booking',(req,res)=>{
 
     let queryText  = `insert into bookings (userId,propertyId,fromDate,toDate,total) values (${id},
         ${propertyId},
-        ${fromDate},
-        ${toDate},
+        '${fromDate}',
+        '${toDate}',
         ${total})`;
 
     connection.query(queryText,(err,result)=>{
