@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
+const { log } = require('console');
 
 const jwtSecret = 'hihellohowru';
 
@@ -10,7 +11,7 @@ app.use(express.json());
 
 
 
-//  token of gaurav eyJhbGciOiJIUzI1NiJ9.YVdGdFoyRjFjbUYy.7E7bbucGvHp5N1JncWwpcRXaetQm9K_RZMbKV5U4ESw
+//  token of aditi eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFuZ2VkUGFzc3dvcmQiOiJhV0Z0WVdScGRHaz0iLCJpZCI6MTIsImlhdCI6MTcxNTAxMzk5MX0.eewFeVJWBah8Aoy8Tuum6TELLwEXune6ZMCdU36qlx4
 
 
 
@@ -74,7 +75,8 @@ app.post('/users/login',(req,res)=>{
             
             const id = result[0].id;
             console.log(id);
-            const token = jwt.sign(changedPassword,jwtSecret);
+            const token = jwt.sign({changedPassword,id}
+                ,jwtSecret);
 
             res.write(JSON.stringify(result));
             res.write(JSON.stringify(token));
@@ -280,10 +282,42 @@ app.post('/category',(req,res)=>{
 // +------------------+-------------+------+-----+-------------------+-------------------+
 
 app.post('/booking',(req,res)=>{
+    // const data = jwt.verify(token,jwtSecret);  experiments here...
+    // console.log("data"+data);
+    
+    // res.json(data.id)
 
 
-   const token =  req.headers.authorization
-   const dataInsideToken = token
+    const token = req.headers.authorization;
+    const dataOfToken = jwt.verify(token,jwtSecret);
+    const id = dataOfToken.id;
+    const propertyId = req.body.propertyId;
+    const fromDate = req.body.fromDate;
+    const toDate = req.body.toDate;
+    const total = req.body.total;
+
+    const connection = mysql.createConnection(connectionString);
+    connection.connect();
+
+    let queryText  = `insert into bookings (userId,propertyId,fromDate,toDate,total) values (${id},
+        ${propertyId},
+        ${fromDate},
+        ${toDate},
+        ${total})`;
+
+    connection.query(queryText,(err,result)=>{
+        if(!err){
+            res.json(result);
+
+        }
+        else{
+            res.json(err);
+        }
+    })
+
+    
+
+    
 
 
 
