@@ -105,7 +105,7 @@ app.use((req,res,next)=>{
         next();
     }
     else{
-        res.write("msg:Token is invalid")
+        res.write('token not present please send it')
     }
 })
 
@@ -269,18 +269,6 @@ app.post('/category',(req,res)=>{
 
 })
 
-// +------------------+-------------+------+-----+-------------------+-------------------+
-// | Field            | Type        | Null | Key | Default           | Extra             |
-// +------------------+-------------+------+-----+-------------------+-------------------+
-// | id               | int         | NO   | PRI | NULL              | auto_increment    |
-// | userId           | int         | YES  |     | NULL              |                   |
-// | propertyId       | int         | YES  |     | NULL              |                   |
-// | fromDate         | varchar(50) | YES  |     | NULL              |                   |
-// | toDate           | varchar(50) | YES  |     | NULL              |                   |
-// | total            | float       | YES  |     | NULL              |                   |
-// | createdTimestamp | datetime    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
-// +------------------+-------------+------+-----+-------------------+-------------------+
-
 app.post('/booking',(req,res)=>{
     // const data = jwt.verify(token,jwtSecret);  experiments here...
     // console.log("data"+data);
@@ -323,6 +311,24 @@ app.post('/booking',(req,res)=>{
 
 })
 
+app.get('/booking',(req,res)=>{
+
+    let connection = mysql.createConnection(connectionString);
+    connection.connect();
+
+    connection.query(`select * from bookings`,(err,result)=>{
+        if(!err){
+            res.json(result);
+        }
+        else{
+            res.json(err);
+        }
+    })
+
+
+
+    
+})
 
 
 
