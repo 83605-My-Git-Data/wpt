@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
+
 const jwtSecret = 'hihellohowru';
 
 
 app.use(express.json());
+
 
 
 //  token of gaurav eyJhbGciOiJIUzI1NiJ9.YVdGdFoyRjFjbUYy.7E7bbucGvHp5N1JncWwpcRXaetQm9K_RZMbKV5U4ESw
@@ -69,6 +71,9 @@ app.post('/users/login',(req,res)=>{
 
     connection.query(queryText,(err,result)=>{
         if(!err){
+            
+            const id = result[0].id;
+            console.log(id);
             const token = jwt.sign(changedPassword,jwtSecret);
 
             res.write(JSON.stringify(result));
@@ -86,6 +91,22 @@ app.post('/users/login',(req,res)=>{
 
    
 })
+
+
+
+app.use((req,res,next)=>{
+    const token = req.headers.authorization;
+
+    if(token != undefined){
+        let dataInsideToken = jwt.verify(token,jwtSecret);
+        console.log(dataInsideToken);
+        next();
+    }
+    else{
+        res.write("msg:Token is invalid")
+    }
+})
+
 
 app.get('/users/profile',(req,res)=>{
     
@@ -241,6 +262,28 @@ app.post('/category',(req,res)=>{
             connection.end();
         }
     })
+
+
+
+})
+
+// +------------------+-------------+------+-----+-------------------+-------------------+
+// | Field            | Type        | Null | Key | Default           | Extra             |
+// +------------------+-------------+------+-----+-------------------+-------------------+
+// | id               | int         | NO   | PRI | NULL              | auto_increment    |
+// | userId           | int         | YES  |     | NULL              |                   |
+// | propertyId       | int         | YES  |     | NULL              |                   |
+// | fromDate         | varchar(50) | YES  |     | NULL              |                   |
+// | toDate           | varchar(50) | YES  |     | NULL              |                   |
+// | total            | float       | YES  |     | NULL              |                   |
+// | createdTimestamp | datetime    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+// +------------------+-------------+------+-----+-------------------+-------------------+
+
+app.post('/booking',(req,res)=>{
+
+
+   const token =  req.headers.authorization
+   const dataInsideToken = token
 
 
 
