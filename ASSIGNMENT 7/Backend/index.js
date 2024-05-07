@@ -90,14 +90,21 @@ app.post('/users/login',(req,res)=>{
 app.use((req,res,next)=>{
     const token = req.headers.authorization;
 
+    try{
+
     if(token != undefined){
         let dataInsideToken = jwt.verify(token,jwtSecret);
         console.log(dataInsideToken);
         next();
     }
+    
     else{
         res.write('token not present please send it')
     }
+}catch(e){
+    res.json(e)
+}
+
 })
 
 
